@@ -2,6 +2,7 @@
 
 import os
 from dataclasses import dataclass
+from pathlib import Path
 
 from dotenv import load_dotenv
 
@@ -25,6 +26,7 @@ class Settings:
         """
 
         load_dotenv(dotenv_path=env_file)
+
         return cls(
             db_driver=os.getenv("DB_DRIVER"),
             db_host=os.getenv("DB_HOST"),
@@ -33,3 +35,21 @@ class Settings:
             db_port=os.getenv("DB_PORT"),
             db_user=os.getenv("DB_USER"),
         )
+
+
+def get_env_path():
+    """
+    Find .env file path
+    :return:
+    """
+    cwd = Path.cwd()
+
+    env_path = cwd / ".env"
+    if env_path.is_file():
+        return env_path
+
+    env_path = cwd.parent / ".env"
+    if env_path.is_file():
+        return env_path
+
+    return None
