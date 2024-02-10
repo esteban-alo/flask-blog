@@ -3,6 +3,7 @@
 import os
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Optional
 
 from dotenv import load_dotenv
 
@@ -36,11 +37,22 @@ class Settings:
             db_user=os.getenv("DB_USER"),
         )
 
+    @property
+    def db_url(self) -> str:
+        """
+        Generates an url of the database
+        :return: database url string
+        """
+        return (
+            f"{self.db_driver}://{self.db_user}:{self.db_password}"
+            f"@{self.db_host}:{self.db_port}/{self.db_name}"
+        )
 
-def get_env_path():
+
+def get_env_path() -> Optional[Path]:
     """
     Find .env file path
-    :return:
+    :return: string path of .env file
     """
     cwd = Path.cwd()
 
