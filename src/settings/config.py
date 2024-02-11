@@ -40,8 +40,8 @@ class Settings:
     @property
     def db_url(self) -> str:
         """
-        Generates an url of the database
-        :return: database url string
+        Generates an url connection for database
+        :return: database url connection string
         """
         return (
             f"{self.db_driver}://{self.db_user}:{self.db_password}"
