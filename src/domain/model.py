@@ -79,7 +79,7 @@ class User(TableQuery):
     last_name: str
     email: str
     profile_picture: Optional[str]
-    user_name: bool
+    username: str
     is_active: bool
     role_id: int
 
