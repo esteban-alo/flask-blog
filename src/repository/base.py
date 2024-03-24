@@ -3,6 +3,7 @@ Base repository abstract class
 """
 
 from abc import ABC, abstractmethod
+from typing import Any, List, Type
 
 from src.domain.model import TableBase
 
@@ -12,13 +13,21 @@ class AbstractRepository(ABC):
     Abstract Repository class
     """
 
-    model_class: TableBase
-
     @abstractmethod
     def add(self, model_class: TableBase) -> TableBase:
         """
         Store a new object
         :param model_class:
+        :return:
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def all(self, limit: int, offset: int) -> List[Type[TableBase]]:
+        """
+        List roles items
+        :param limit:
+        :param offset:
         :return:
         """
         raise NotImplementedError
@@ -42,9 +51,10 @@ class AbstractRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def update(self, **kwargs) -> TableBase:
+    def update(self, _id: int, **kwargs: Any) -> TableBase:
         """
         Update object information
+        :param _id:
         :param kwargs:
         :return:
         """
