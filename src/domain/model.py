@@ -1,5 +1,5 @@
 """
-Moodels class
+Models class
 """
 
 from dataclasses import dataclass
@@ -8,24 +8,24 @@ from typing import List, Optional
 from uuid import UUID
 
 
-@dataclass
+@dataclass(kw_only=True)
 class TableBase:
     """
     Table base model definition
     """
 
-    id: Optional[int]
-    created_at: Optional[datetime]
-    updated_at: Optional[datetime]
+    id: Optional[int] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
 
 
-@dataclass
+@dataclass(kw_only=True)
 class TableQuery(TableBase):
     """
     Model can be queried
     """
 
-    public_id: Optional[UUID]
+    public_id: Optional[UUID] = None
 
 
 @dataclass
