@@ -54,14 +54,10 @@ def get_env_path() -> Optional[Path]:
     Find .env file path
     :return: string path of .env file
     """
-    cwd = Path.cwd()
+    current = Path.cwd()
+    for folder in [current, current.parent]:
+        env_path = folder / ".env"
+        if env_path.is_file():
+            return env_path
 
-    env_path = cwd / ".env"
-    if env_path.is_file():
-        return env_path
-
-    env_path = cwd.parent / ".env"
-    if env_path.is_file():
-        return env_path
-
-    return None
+    raise FileNotFoundError(".env file not found")
