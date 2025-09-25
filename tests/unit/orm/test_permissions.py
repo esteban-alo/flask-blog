@@ -46,7 +46,7 @@ def test_add(permission_repository, dummy_permission):
 
     assert result.name == dummy_permission.name
     assert result.id is not None
-    assert result.public_id is not None
+    assert result.public_id == dummy_permission.public_id
 
 
 def test_all(permission_repository):
